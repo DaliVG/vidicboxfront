@@ -14,7 +14,7 @@ export function App() {
       <main>
         <Routes>
           <Route path="products/list" element={<ProductsGrid />}/>
-          <Route path="/:idProduct" element={<ProductDetails />}/>
+          <Route path="products/:idProduct" element={<ProductDetails />}/>
           <Route path="/" element={<Home />}/>
         </Routes>
       </main>

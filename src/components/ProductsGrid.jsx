@@ -12,10 +12,11 @@ export function ProductsGrid() {
         setProducts(data);
       })
   }, []);
+  
     return (
     <ul className={styles.productsGrid}>
         {products.map((product) => (
-            <ProductCard key={product.description} product={product} />
+            <ProductCard key={product.idProduct} product={product} />
         ))}
     </ul>
   );

@@ -4,6 +4,7 @@ import { Spinner } from "../components/Spinner";
 import { get } from "../utils/httpClient";
 import styles from "../css/ProductDetails.module.css";
 import logo from '../img/mandoblack.png'
+import Button from 'react-bootstrap/Button';
 
 export function ProductDetails() {
   const { idProduct } = useParams();
@@ -34,15 +35,13 @@ export function ProductDetails() {
           <strong>Title:</strong> {product.description}
         </p>
         <p>
-        <strong>Ingredientes:</strong>{" "}
-        {/* {data.forEach(element => {
-            <img
-            className={`${styles.col} ${styles.productImage}`}
-            src={element.URL}
-            alt={element.ingredient}
-          />
-          })} */}
+        <strong>Props:</strong>{" "}
         </p>
+        <div>{product.description}</div>
+        <div>{product.price}</div>
+        <div>{product.state}</div>
+        <Button variant="outline-dark">Editar</Button>{' '}
+        <Button variant="outline-danger">Borrar</Button>{' '}
       </div>
     </div>
   );

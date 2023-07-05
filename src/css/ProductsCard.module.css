@@ -1,8 +1,12 @@
 .productCard {
     list-style: none;
     text-align: center;
-    height: 100%;
-    width: 100%;
+  }
+  .productCard a {
+    text-decoration: none;
+    color: black;
+    letter-spacing: 2px;
+    font-weight: 600;
   }
   
   .productCard:hover {
@@ -12,6 +16,8 @@
   .productImage {
     border-radius: 10px;
     background-color: azure;
+    height: auto;
+    width: 100%;
   }
   
   @media (max-width: 560px) {
