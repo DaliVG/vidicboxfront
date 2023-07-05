@@ -1,16 +1,17 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
 import logo from '../img/mandoblack.png'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/home.css';
 
 export function Home() {
 return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-          <img src={logo} className="App-marca" alt="marca" width="650px"
-          height="200px"/>
-          </p>
-        </header>
+    <Container>
+      <div className='welcome'>
+        <img src={logo} className='img-fluid' alt='home' />
+        <div className='subtitle'>
+          This is the way
+        </div>
       </div>
-      );
+    </Container>)
     }

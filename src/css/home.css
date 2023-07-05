@@ -1,0 +1,18 @@
+.welcome{
+    position: relative;
+    top: 50px;
+    height: 800px;
+    width: 100%;
+    z-index:-1;
+    text-align: center;
+}
+
+.welcome img{
+    height: 500px;
+}
+
+.subtitle{
+    font-size: 100px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 0px 0px 10px;
+}

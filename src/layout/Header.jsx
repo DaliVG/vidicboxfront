@@ -5,7 +5,7 @@ import '../css/navbar.css';
 
 function Header() {
   return (
-    <Navbar bg="dark" expand="lg">
+    <Navbar bg="light" expand="lg">
         <Navbar.Brand href=".">
           <ul className="bran-icon">
             <li>
@@ -22,7 +22,10 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="gap-5 m-5">
-            <Nav.Link href="/welcome">Welcome</Nav.Link>
+            <Nav.Link href="/">Welcome</Nav.Link>
+          </Nav>
+          <Nav className="gap-5 m-5">
+            <Nav.Link href="products/list">Mandalore</Nav.Link>
           </Nav>
           <Nav className="gap-5 log">
           </Nav>

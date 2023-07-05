@@ -1,0 +1,22 @@
+.productCard {
+    list-style: none;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .productCard:hover {
+    opacity: 0.8;
+  }
+  
+  .productImage {
+    border-radius: 10px;
+    background-color: azure;
+  }
+  
+  @media (max-width: 560px) {
+    .productImage {
+      width: 90%;
+      height: auto;
+    }
+  }
