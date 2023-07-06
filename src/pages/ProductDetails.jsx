@@ -37,12 +37,23 @@ export function ProductDetails() {
         <p>
         <strong>Props:</strong>{" "}
         </p>
-        <div>{product.description}</div>
-        <div>{product.price}</div>
-        <div>{product.state}</div>
+        <div>Name: {product.description}</div>
+        <div>Price: {product.price}€</div>
+        <div>State: {product.state}</div>
+        
+        <div>Offer: {product["priceReductions"]["priceReductionName"]}</div>
+        <div>Discount: {product["priceReductions"]["priceReductionAmount"]}€</div>
+
+        <div>
+        Suppliers:
+        {product.suppliersList.map((supplier) => (
+          <div className={styles.responses} key={supplier.idSupplier}>{supplier.supplier}</div>
+        ))}
+      </div>
         <Button variant="outline-dark">Editar</Button>{' '}
         <Button variant="outline-danger">Borrar</Button>{' '}
       </div>
     </div>
   );
+
 }

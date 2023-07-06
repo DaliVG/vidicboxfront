@@ -22,3 +22,8 @@
   .firstItem {
     margin-top: 0;
   }
+
+  .responses{
+    font-style: italic;
+    color:brown;
+  }
