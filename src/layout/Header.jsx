@@ -22,7 +22,7 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="gap-5 m-5">
-            <Nav.Link href="/products/list">Mandalore</Nav.Link>
+            <Nav.Link href="/products/list">Mandalorian list</Nav.Link>
           </Nav>
         </Navbar.Collapse>
     </Navbar>

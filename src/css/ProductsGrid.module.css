@@ -11,3 +11,9 @@
       grid-template-columns: 100%;
     }
   }
+
+  .filter{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
