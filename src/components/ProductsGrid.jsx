@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { ProductCard } from "./ProductCard";
+
 import styles from "../css/ProductsGrid.module.css";
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export function ProductsGrid() {
   const [products, setProducts] = useState([]);
-  const [isActive, setIsActive] = useState(true)
-  const [buttonText, setButtonText] = useState("Filter by Active");
-  const [buttonStyle, setButtonStyle] = useState("outline-success");
+  const [isActive, setIsActive] = useState(false);
+
+  const text = isActive ? 'Reset filter' : 'Filter by Active'
+  const style = isActive ? 'outline-secondary' : 'outline-dark'
 
   useEffect(() => {
     fetch('')
@@ -18,27 +22,29 @@ export function ProductsGrid() {
       })
   }, []);
 
-  useEffect(()=>{
-  }, [buttonStyle]);
+  const filteredProducts = isActive ? products.filter(product => product.state==="Active") : products;
 
-    const handleOnClick = (e) =>{
-      if(isActive){
-        setButtonText("Filter by Active");
-        setButtonStyle("outline-success")
-      } else {
-        setButtonText("Reset filter")
-        setButtonStyle("outline-dark")
-      }
-      setIsActive(!isActive);
-      e.preventDefault();
-    };
+  const handleClick=()=>{
+    setIsActive(!isActive);
+    }
+
+  const handleCreate=()=>{
+    setIsActive(!isActive);
+    }
 
     return (<>
     <Container className={styles.filter}>
-      <Button variant={buttonStyle} onClick={handleOnClick}>{buttonText}</Button>
+      <Row>
+        <Col xs={6}>        
+          <Button variant={style} onClick={handleClick}>{text}</Button>
+        </Col>
+        <Col xs={6}>        
+          <Button variant="outline-primary" onClick={handleCreate}>Create a mandalorian</Button>
+        </Col>
+      </Row>
      </Container>
     <ul className={styles.productsGrid}>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
             <ProductCard key={product.idProduct} product={product} />
         ))}
     </ul>

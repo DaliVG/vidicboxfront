@@ -3,6 +3,10 @@
     justify-content: center;
     flex-wrap: wrap;
   }
+  .detailsContainer img{
+    position: relative;
+    translate: 0% 40%;
+  }
   
   .col {
     max-width: 400px;
@@ -13,10 +17,14 @@
   
   .productImage {
     border-radius: 15px;
+    height: 100%;
+    width: 100%;
+    margin: 10px;
   }
   
   .productDetails {
-    font-size: 1.5rem;
+    font-size: 20px;
+    line-height: 40px;
   }
   
   .firstItem {

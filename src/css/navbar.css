@@ -1,13 +1,15 @@
 .navbar a {
     color: black; 
-    font-size: large;
-    font-weight: bold;
-    text-shadow: 0px 0px 60px black;
+    font-size: 20px;
+    text-shadow: 0px 0px 60px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: text-shadow 0.5s;
 }
 
 .navbar a:hover {
-    color: white; 
-    text-shadow: 0px 0px 5px black;
+    color: rgb(58, 58, 58);
+    text-shadow: 0px 0px 3px white, 0px 0px 15px rgb(75, 107, 177), 0px 0px 10px rgb(75, 107, 177);
 }
 
 .navbar ul{

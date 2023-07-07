@@ -1,23 +1,30 @@
+
 .productCard {
     list-style: none;
     text-align: center;
-  }
-  .productCard a {
-    text-decoration: none;
-    color: black;
-    letter-spacing: 2px;
-    font-weight: 600;
+    border-radius: 5px;
+    box-shadow: 0px -5px 10px rgb(150, 150, 150), 0px 5px 20px rgb(75, 107, 177);
   }
   
+  .productCard a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    letter-spacing: 7px;
+    font-size: larger;
+    font-weight: 600;
+  }
+
   .productCard:hover {
     opacity: 0.8;
   }
   
-  .productImage {
-    border-radius: 10px;
-    background-color: azure;
-    height: auto;
-    width: 100%;
+  .subtitle {
+  text-transform: none;
+  color:rgb(75, 107, 177);
+  font-size: medium;
+  letter-spacing: 1px;
+  text-shadow: 0px 0px 60px black, 0px 0px 10px white;
   }
   
   @media (max-width: 560px) {
