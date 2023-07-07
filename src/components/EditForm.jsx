@@ -10,12 +10,11 @@ export function EditForm() {
 const [product, setProducts] = useState([]);
 const { idProduct } = useParams();
 
-
-useEffect(() => {
-  get("products/"+idProduct).then((data) => {
-    setProducts(data);
-  });
-}, [idProduct]);
+  useEffect(() => {
+    get("products/"+idProduct).then((data) => {
+      setProducts(data);
+    });
+  }, [idProduct]);
 
   return (
     <Container className={styles.box}>
@@ -23,13 +22,11 @@ useEffect(() => {
         <Form>
         <Form.Group>
             <Form.Label>Name:</Form.Label>
-            <Form.Control type="text" 
-                            placeholder="Enter the new name" />
+            <Form.Control type="text" placeholder="Enter the new name" />
             </Form.Group>
             <Form.Group>
             <Form.Label>Price:</Form.Label>
-            <Form.Control type="number" 
-                            placeholder="Enter a price" />
+            <Form.Control type="number" placeholder="Enter a price" />
             </Form.Group>
             <Form.Group>
             <Form.Label>Enter an offer:</Form.Label>
