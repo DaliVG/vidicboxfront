@@ -16,8 +16,7 @@ const handleSubmit = () =>{};
             </Form.Group>
             <Form.Group>
             <Form.Label>Item code:</Form.Label>
-            <Form.Control type="text" 
-                            placeholder="Enter a price" />
+            <Form.Control type="text" placeholder="Enter a price" />
             </Form.Group>
 
             <Button variant="secondary mt-4" type="submit">
