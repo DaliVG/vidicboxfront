@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Spinner } from "../components/Spinner";
 import { EditForm } from "../components/EditForm";
-import { get } from "../utils/httpClient";
 import styles from "../css/ProductDetails.module.css";
 
 import logo from '../img/mandoblack.png'
@@ -10,6 +9,9 @@ import Button from 'react-bootstrap/Button';
 import { Container } from "react-bootstrap";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
+import ApiService from "../utils/services/ApiService";
+
 
 export function ProductDetails() {
   const { idProduct } = useParams();
@@ -19,11 +21,25 @@ export function ProductDetails() {
 
   useEffect(() => {
     setIsLoading(true);
-    get("products/"+idProduct).then((data) => {
-      setProducts(data);
+    ApiService.get(idProduct)
+    .then(response => {
+      setProducts(response.data);
       setIsLoading(false);
+    })
+    .catch(e => {
+      console.log(e);
     });
   }, [idProduct]);
+
+  const deleteProduct = () => {
+    ApiService.remove(idProduct)
+    .then(
+      alert("The Product was deleted successfully! This is the way"))
+    .catch(e => {
+      console.log(e);
+    });
+  };
+
 
   if (isLoading) {
     return <Spinner />;
@@ -48,25 +64,28 @@ export function ProductDetails() {
         <Col>
         <div className={`${styles.col} ${styles.productDetails}`}>
             <p className={styles.firstItem}>
-              <strong>Title:</strong> {product.description}
+              <strong>Mandalorian</strong>
             </p>
-            <p>
-            <strong>Props:</strong>{" "}
-            </p>
-            <div>Name: {product.description}</div>
-            <div>Price: {product.price}€</div>
-            <div>State: {product.state}</div>
-            <div>Offer: {product["priceReductions"]["priceReductionName"]}</div>
-            <div>Discount: {product["priceReductions"]["priceReductionAmount"]}€</div>
+            <div><strong>Name:</strong> {product.description}</div>
+            <div><strong>Price:</strong> {product.price}€</div>
+            <div><strong>ItemCode:</strong> {product.itemCode}</div>
+            <div><strong>State:</strong> {product.state}</div>
+            <div><strong>Creation Date:</strong> {product.creationDate}</div>
+            {(product.priceReductions.priceReductionName="") && (
+              <>
+                <div><strong>Offer:</strong> {product.priceReductions.priceReductionName}</div>
+                <div><strong>Discount:</strong> {product.priceReductions.priceReductionAmount}€</div>
+              </>
+              )}
             <div>
-              Suppliers:
+            <strong>Suppliers:</strong>
               {product.suppliersList.map((supplier) => (
                 <div className={styles.responses} key={supplier.idSupplier}>{supplier.supplier}</div>
               ))}
             </div>
-          </div>
+          </div>{product.state==="Active" ? <Button variant="outline-dark" onClick={handleClick}>Edit mandalorian</Button> : <div></div>}
           <Button variant="outline-dark" onClick={handleClick}>Edit mandalorian</Button>
-          <Button variant="outline-danger">Delete mandalorian</Button>{' '}
+          <Button variant="outline-danger" onClick={deleteProduct}>Delete mandalorian</Button>{' '}
         </Col> 
         <Col>
          {isActive ? <EditForm/> : <></>}

@@ -1,7 +1,8 @@
-const API = "http://localhost:8080/";
+import axios from "axios";
 
-export function get(path) {
-  //debounce
-    console.log(API+path)
-  return fetch(API + path).then((result) => result.json());
-}
+export default axios.create({
+  baseURL: "http://localhost:8080/",
+  headers: {
+    "Content-type": "application/json"
+  }
+});

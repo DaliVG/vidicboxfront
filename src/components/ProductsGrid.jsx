@@ -8,6 +8,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Popup from 'reactjs-popup';
 
+import ApiService from "../utils/services/ApiService";
+
 export function ProductsGrid() {
   const [products, setProducts] = useState([]);
   const [isActive, setIsActive] = useState(false);
@@ -17,12 +19,10 @@ export function ProductsGrid() {
   const style = isActive ? 'outline-secondary' : 'outline-dark'
 
   useEffect(() => {
-    fetch('')
-      .then(response => response.json())
-      .then(data => {
-        setProducts(data);
-      })
-  }, []);
+    ApiService.getAll()
+      .then(response => {
+        setProducts(response.data);
+      }) }, []);
 
   const filteredProducts = isActive ? products.filter(product => product.state==="Active") : products;
 
