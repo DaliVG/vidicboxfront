@@ -8,6 +8,11 @@ const getAllPriceReductions = () => {
   return http.get("/pricereduction/list");
 };
 
+const getAllSuppliers = () => {
+  return http.get("/suppliers/list");
+};
+
+
 const get = id => {
   return http.get(`/products/${id}`);
 };
@@ -27,6 +32,7 @@ const remove = id => {
 const ApiService = {
   getAll,
   getAllPriceReductions,
+  getAllSuppliers,
   get,
   create,
   update,

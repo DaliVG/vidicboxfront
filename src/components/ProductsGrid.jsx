@@ -23,6 +23,7 @@ export function ProductsGrid() {
       .then(response => {
         setProducts(response.data);
       }) }, []);
+      
 
   const filteredProducts = isActive ? products.filter(product => product.state==="Active") : products;
 

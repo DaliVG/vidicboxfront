@@ -35,6 +35,7 @@ export function ProductDetails() {
     ApiService.remove(idProduct)
     .then(
       alert("The Product was deleted successfully! This is the way"))
+    .then(window.location.href='http://localhost:3000/products/list')
     .catch(e => {
       console.log(e);
     });
@@ -71,7 +72,7 @@ export function ProductDetails() {
             <div><strong>ItemCode:</strong> {product.itemCode}</div>
             <div><strong>State:</strong> {product.state}</div>
             <div><strong>Creation Date:</strong> {product.creationDate}</div>
-            {(product.priceReductions.priceReductionName!==null && product.priceReductions.priceReductionName!=="") && (
+            {(product.priceReductions && product.priceReductions.priceReductionName!==null && product.priceReductions.priceReductionName!=="") && (
               <>
                 <div><strong>Offer:</strong> {product.priceReductions.priceReductionName}</div>
                 <div><strong>Discount:</strong> {product.priceReductions.priceReductionAmount}€</div>
@@ -84,7 +85,6 @@ export function ProductDetails() {
               ))}
             </div>
           </div>{product.state==="Active" ? <Button variant="outline-dark" onClick={handleClick}>Edit mandalorian</Button> : <div></div>}
-          <Button variant="outline-dark" onClick={handleClick}>Edit mandalorian</Button>
           <Button variant="outline-danger" onClick={deleteProduct}>Delete mandalorian</Button>{' '}
         </Col> 
         <Col>
