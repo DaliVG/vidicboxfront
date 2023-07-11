@@ -20,16 +20,17 @@ export function EditForm() {
     state: "Active",
     suppliersList: [],
     priceReductions: {
-      idPriceReduction: "",
-      priceReductionName: "",
-      priceReductionAmount: 0
-      }
+      idPriceReduction: null,
+      priceReductionName: null,
+      priceReductionAmount: null
+    }
   };
   useEffect(() => {
     ApiService.getAllPriceReductions()
       .then(response => {
         setPriceReductions(response.data);
-      }) }, []);
+      })
+  }, []);
 
   useEffect(() => {
     ApiService.get(idProduct)
@@ -43,16 +44,35 @@ export function EditForm() {
 
   const [modifyProduct, setModifyProduct] = useState(initialProduct);
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setModifyProduct({ ...modifyProduct, [name]: value });
-  }
+    if (name === "priceReductions.idPriceReduction") {
+      const selectedPriceReduction = priceReductions.find(
+        (reduction) => reduction.idPriceReduction === parseInt(value)
+      );
+      setModifyProduct({
+        ...modifyProduct,
+        priceReductions: {
+          ...modifyProduct.priceReductions,
+          idPriceReduction: value,
+          priceReductionName: selectedPriceReduction.priceReductionName,
+          priceReductionAmount: selectedPriceReduction.priceReductionAmount
+        }
+      });
+    } else if(value===""){
+        setModifyProduct({
+          ...modifyProduct,
+          priceReductions: {}
+        });
+    } else{
+      setModifyProduct({ ...modifyProduct, [name]: value });
+    }
+  };
 
-  
-  const handleInputReductions = event => {
-    const { name, value } = event.target;
-    setModifyProduct({ ...modifyProduct, priceReductions:{[name]: value }});
-  }
+
+  priceReductions.find(
+    (reduction) => reduction.idPriceReduction === modifyProduct.priceReductions.idPriceReduction
+  );
 
   const updateProduct = () => {
     if (modifyProduct.description === "") {
@@ -61,21 +81,20 @@ export function EditForm() {
     if (modifyProduct.price === "") {
       modifyProduct.price = product.price;
     }
-    if (modifyProduct.priceReductions.priceReductionName === "") {
-      modifyProduct.priceReductions = product.priceReductions;
-    } else {
-      
-      modifyProduct.priceReductions = priceReductions.idPriceReduction;
-      priceReductions.priceReductionName = priceReductions[parseInt(priceReductions.idPriceReduction)].priceReductionName;
-      priceReductions.priceReductionAmount = priceReductions[parseInt(priceReductions.idPriceReduction)].priceReductionAmount;
+
+    if (modifyProduct.priceReductions.priceReductionName === null && modifyProduct.priceReductions.priceReductionName === "" ) {
+      modifyProduct.priceReductions.idPriceReduction = product.priceReductions.idPriceReduction;
+      modifyProduct.priceReductions.priceReductionName = product.priceReductions.priceReductionName;
+      modifyProduct.priceReductions.priceReductionAmount = product.priceReductions.priceReductionAmount;
     }
-    if(modifyProduct)
-    ApiService.update(idProduct, modifyProduct)
-      .then(
-        alert("The Product was updated successfully! This is the way"))
-      .catch(e => {
-        console.log(e);
-      });
+
+    if (modifyProduct)
+      ApiService.update(idProduct, modifyProduct)
+        .then(
+          alert("The Product was updated successfully! This is the way"))
+        .catch(e => {
+          console.log(e);
+        });
   };
 
   return (
@@ -90,19 +109,30 @@ export function EditForm() {
           <Form.Label>Price:</Form.Label>
           <Form.Control type="number" placeholder="Enter a price" name="price" value={modifyProduct.price} onChange={handleInputChange} />
         </Form.Group>
-        <Form.Label>Is active?</Form.Label>
-        <Form.Select aria-label="Default select example" name="state" value={modifyProduct.state} onChange={handleInputChange}>
-          <option>Select state</option>
-          <option value="Active">Active</option>
-          <option value="discontinued">Discontinued</option>
-        </Form.Select>
-        <Form.Label>Is any offert on?</Form.Label>
-        <Form.Select aria-label="Default select example" name="idPriceReductions" value={modifyProduct.priceReductions} onChange={handleInputReductions}>
-        <option>Select state</option>
-          {priceReductions.map((reduction) => (
-        <option key={reduction.idPriceReduction} value={reduction}> {reduction.priceReductionName}</option>))}
-        </Form.Select>
-
+        <Form.Group>
+          <Form.Label>Is active?</Form.Label>
+          <Form.Select aria-label="Default select example" name="state" value={modifyProduct.state} onChange={handleInputChange}>
+            <option value="Active">Active</option>
+            <option value="discontinued">Discontinued</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Is any offert on?</Form.Label>
+          <Form.Select aria-label="Default select example" name="priceReductions.idPriceReduction" value={modifyProduct.priceReductions.idPriceReduction} onChange={handleInputChange}>
+          <option value="">Anyone</option>
+            {priceReductions.map((reduction) => {
+              if (reduction.priceReductionName!==null && reduction.priceReductionName!=="") {
+                return (
+                  <option key={reduction.idPriceReduction} value={reduction.idPriceReduction}>
+                    {reduction.priceReductionName}
+                  </option>
+                );
+                
+              }
+              return null;
+            })}
+          </Form.Select>
+        </Form.Group>
         <Button variant="primary" type="submit" onClick={updateProduct}>
           Update Mandalorian
         </Button>

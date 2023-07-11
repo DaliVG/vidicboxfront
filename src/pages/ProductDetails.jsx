@@ -71,7 +71,7 @@ export function ProductDetails() {
             <div><strong>ItemCode:</strong> {product.itemCode}</div>
             <div><strong>State:</strong> {product.state}</div>
             <div><strong>Creation Date:</strong> {product.creationDate}</div>
-            {(product.priceReductions.priceReductionName="") && (
+            {(product.priceReductions.priceReductionName!==null && product.priceReductions.priceReductionName!=="") && (
               <>
                 <div><strong>Offer:</strong> {product.priceReductions.priceReductionName}</div>
                 <div><strong>Discount:</strong> {product.priceReductions.priceReductionAmount}€</div>
