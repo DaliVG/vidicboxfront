@@ -19,76 +19,97 @@ export function ProductDetails() {
   const [product, setProducts] = useState(null);
   const [isActive, setIsActive] = useState(false);
 
+
   useEffect(() => {
     setIsLoading(true);
     ApiService.get(idProduct)
-    .then(response => {
-      setProducts(response.data);
-      setIsLoading(false);
-    })
-    .catch(e => {
-      console.log(e);
-    });
+      .then(response => {
+        setProducts(response.data);
+        setIsLoading(false);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }, [idProduct]);
 
   const deleteProduct = () => {
     ApiService.remove(idProduct)
-    .then(
-      alert("The Product was deleted successfully! This is the way"))
-    .then(window.location.href='http://localhost:3000/products/list')
-    .catch(e => {
-      console.log(e);
-    });
+      .then(
+        alert("The Product was deleted successfully! This is the way"))
+      .then(window.location.href = 'http://localhost:3000/products/list')
+      .catch(e => {
+        console.log(e);
+      });
   };
-
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  const handleClick=()=>{
+  const handleClick = () => {
     setIsActive(!isActive);
   }
-
+  
+const changeMyVariable = ()=>{
+  if(product.priceReductions && product.priceReductions.priceReductionName !== null && product.priceReductions.priceReductionName !== ""){
+    let result = product.price - product.priceReductions.priceReductionAmount;
+    if (result<=0){
+      return null;
+    } else {
+      return result;
+    }
+  } else{
+    return null;
+  }
+}
   return (
     <Container>
       <Row>
         <Col>
-        <div className={styles.detailsContainer}>
-          <img
-            className={`${styles.col} ${styles.productImage}`}
-            src={logo}
-            alt={"mando"}
-          />
-        </div>
+          <div className={styles.detailsContainer}>
+            <img
+              className={`${styles.col} ${styles.productImage}`}
+              src={logo}
+              alt={"mando"}
+            />
+          </div>
         </Col>
         <Col>
-        <div className={`${styles.col} ${styles.productDetails}`}>
+          <div className={`${styles.col} ${styles.productDetails}`}>
             <p className={styles.firstItem}>
               <strong>Mandalorian</strong>
             </p>
             <div><strong>Name:</strong> {product.description}</div>
-            <div><strong>Price:</strong> {product.price}€</div>
+            {(product.priceReductions && product.priceReductions.priceReductionName !== null && product.priceReductions.priceReductionName !== "" &&product.price!==0) ?
+            <div className={styles.discounton}><strong>Price:</strong> {product.price}€</div>:<div><strong>Price:</strong> {product.price}€</div>}
             <div><strong>ItemCode:</strong> {product.itemCode}</div>
             <div><strong>State:</strong> {product.state}</div>
             <div><strong>Creation Date:</strong> {product.creationDate}</div>
-            {(product.priceReductions && product.priceReductions.priceReductionName!==null && product.priceReductions.priceReductionName!=="") && (
+            {(product.priceReductions && product.priceReductions.priceReductionName !== null && product.priceReductions.priceReductionName !== "") && (
               <>
                 <div><strong>Offer:</strong> {product.priceReductions.priceReductionName}</div>
                 <div><strong>Discount:</strong> {product.priceReductions.priceReductionAmount}€</div>
               </>
-              )}
+            )}
             <div>
-            <strong>Suppliers:</strong>
+              <strong>Suppliers:</strong>
               {product.suppliersList.map((supplier) => (
                 <div className={styles.responses} key={supplier.idSupplier}>{supplier.supplier}</div>
               ))}
             </div>
-          </div>{product.state==="Active" ? <Button variant="outline-dark" onClick={handleClick}>Edit mandalorian</Button> : <div></div>}
+            <div>
+              {(product.priceReductions && product.priceReductions.priceReductionAmount !== null && product.priceReductions.priceReductionAmount < product.price && product.price !== 0) ? (
+                <div className={styles.discount}><strong>New Price!</strong> {changeMyVariable()} €</div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+
+          </div>{product.state === "Active" ? <Button variant="outline-dark" onClick={handleClick}>Edit mandalorian</Button> : <div></div>}
           <Button variant="outline-danger" onClick={deleteProduct}>Delete mandalorian</Button>{' '}
-        </Col> 
+        </Col>
         <Col>
-         {isActive ? <EditForm/> : <></>}
+          {isActive ? <EditForm /> : <></>}
         </Col>
       </Row>
     </Container>

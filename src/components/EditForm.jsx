@@ -26,6 +26,7 @@ export function EditForm() {
     }
   };
 
+
   useEffect(() => {
     ApiService.getAllPriceReductions()
       .then(response => {
@@ -52,8 +53,13 @@ export function EditForm() {
 
   const [modifyProduct, setModifyProduct] = useState(initialProduct);
 
+  // Maneja los onChange del form para recoger los cambios y los setea en el objeto que se envía 
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
+    // priceReductions 
+
     if (name === "priceReductions.idPriceReduction") {
       const selectedPriceReduction = priceReductions.find(
         (reduction) => reduction.idPriceReduction === parseInt(value)
@@ -67,7 +73,11 @@ export function EditForm() {
           priceReductionAmount: selectedPriceReduction.priceReductionAmount
         }
       });
+
+      // supplierList
+
     } else if (name === "suppliersList") {
+
       const selectedSupplier = suppliers.find(
         (supplier) => supplier.idSupplier === parseInt(value));
 
@@ -75,6 +85,7 @@ export function EditForm() {
         (supplier) => supplier.idSupplier === selectedSupplier.idSupplier);
 
       if (!isSupplierExist) {
+
        setModifyProduct({
           ...modifyProduct,
           suppliersList: [...modifyProduct.suppliersList, {
@@ -85,12 +96,13 @@ export function EditForm() {
     } else {
       setModifyProduct({ ...modifyProduct, [name]: value });
     };
+
   }
     const updateProduct = () => {
       if (modifyProduct.description === "") {
         modifyProduct.description = product.description;
       }
-      if (modifyProduct.price === "") {
+      if (modifyProduct.price === "" || modifyProduct.price === 0) {
         modifyProduct.price = product.price;
       }
 

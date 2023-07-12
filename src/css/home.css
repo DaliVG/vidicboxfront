@@ -8,11 +8,17 @@
 }
 
 .welcome img{
-    height: 500px;
+    height: 450px;
 }
 
 .subtitle{
     font-size: 100px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Mandalor;
     text-shadow: 0px 0px 10px;
 }
+
+@font-face {
+    font-family: "Mandalor";
+    src: url("/src/css/fonts/mandalor.ttf") format("truetype");
+    font-weight: 400;
+  }

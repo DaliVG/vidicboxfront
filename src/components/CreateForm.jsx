@@ -19,12 +19,14 @@ export function CreateForm() {
   }
 
   const handleCreateProduct = () =>{
+    if(modifyProduct.itemCode!==""){
       ApiService.create(modifyProduct)
       .then(
         alert("The Product was created successfully! This is the way"))
       .catch(e => {
         console.log(e);
       });
+    }
   }
   
 
@@ -39,7 +41,7 @@ const handleSubmit = () =>{};
             </Form.Group>
             <Form.Group>
             <Form.Label>Item code:</Form.Label>
-            <Form.Control type="text" placeholder="Enter an item code" name="itemCode" value={modifyProduct.itemCode} onChange={handleInputChange}/>
+            <Form.Control type="text" placeholder="Enter an item code" name="itemCode" value={modifyProduct.itemCode} onChange={handleInputChange} required/>
             </Form.Group>
             <Button variant="secondary mt-4" type="submit" onClick={handleCreateProduct}>
             This is the way

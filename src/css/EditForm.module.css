@@ -6,3 +6,16 @@
   height: 600px;
   border-radius: 5px;
 }
+
+.box button{
+  margin-top: 15%;
+  margin-left: 30%;
+}
+
+.box h1{
+  text-align: center;
+}
+
+.box label{
+  font-weight: 700;
+}
