@@ -20,6 +20,12 @@
     list-style: none;
 }
 
+.log{
+    display: flex;
+    position: absolute;
+    right: 150px;
+  }
+
 .navbar{
     position: sticky;
     top: 0;

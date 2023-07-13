@@ -25,6 +25,10 @@ function Header() {
             <Nav.Link href="/products/list">Mandalorian list</Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        <Nav className="gap-2 log">
+            <Nav.Link href="/login">Log-in</Nav.Link>
+            <Nav.Link href="/register">Register</Nav.Link>
+          </Nav>
     </Navbar>
   );
 }

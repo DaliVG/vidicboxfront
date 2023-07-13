@@ -29,12 +29,10 @@ export function CreateForm() {
     }
   }
   
-
-const handleSubmit = () =>{};
   return (
     <Container className={styles.box}>
         <h1>Create</h1>
-        <Form className={styles.form} onSubmit={handleSubmit}>
+        <Form className={styles.form}>
         <Form.Group>
             <Form.Label>Name:</Form.Label>
             <Form.Control type="text" placeholder="Enter the new name" name="description" value={modifyProduct.description} onChange={handleInputChange}/>

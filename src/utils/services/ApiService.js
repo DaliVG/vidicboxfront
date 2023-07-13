@@ -12,6 +12,9 @@ const getAllSuppliers = () => {
   return http.get("/suppliers/list");
 };
 
+const login = data => {
+  return http.post("/login", data);
+};
 
 const get = id => {
   return http.get(`/products/${id}`);
@@ -36,7 +39,8 @@ const ApiService = {
   get,
   create,
   update,
-  remove
+  remove,
+  login
 };
 
 export default ApiService;
