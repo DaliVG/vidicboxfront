@@ -4,6 +4,7 @@ import '../css/login.css';
 import { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import AuthService from "../utils/services/AuthService";
 
 export function Auth() {
 
@@ -20,8 +21,15 @@ export function Auth() {
     };
 
     const handleLogin = () => {
-        
-    };
+            AuthService.login(loginPayload).then(() => {
+                console.log()
+                window.router.navigate("/");
+                window.location.reload();
+              })
+              .catch(e => {
+                console.log(e);
+              });
+            }
 
     return (
         <div className="Auth-form-container">
