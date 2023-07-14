@@ -22,7 +22,7 @@ export function Auth() {
 
     const handleLogin = () => {
             AuthService.login(loginPayload).then(() => {
-                console.log()
+                localStorage.setItem("user", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIiwiZXhwIjoxNjkxOTMwOTU4LCJ1c2VybmFtZSI6IlVzZXIifQ.3kmtxYJPN6nCEj7LwhwyO0UBDAFln_xxTYNmCYSTgV4");
                 window.router.navigate("/");
                 window.location.reload();
               })
