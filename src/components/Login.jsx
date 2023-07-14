@@ -1,9 +1,7 @@
 import React from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/login.css';
-import axios from "axios";
 import { useState } from "react";
-import { tokenUtil } from "../utils/tokenUtil";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -22,16 +20,7 @@ export function Auth() {
     };
 
     const handleLogin = () => {
-        axios.post("http://localhost:8080/", loginPayload)
-            .then(response => {
-                const token = response.data.token;
-                localStorage.setItem("token", token);
-                tokenUtil(token);
-                window.location.href = '/';
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        
     };
 
     return (
